@@ -2,12 +2,13 @@ import React, { useCallback } from 'react'
 import { View, Text, Button } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useTheme } from '@/hooks/useTheme'
-import { mockWalletInfo } from '@/data/wallet'
+import { useWalletStore } from '@/store/useWalletStore'
 import ThemeSwitch from '@/components/ThemeSwitch'
 import styles from './index.module.scss'
 
 const MinePage: React.FC = () => {
   const { getNavigationBarColor } = useTheme()
+  const { balance, totalRecharge, totalConsume } = useWalletStore()
 
   const navBarColor = getNavigationBarColor()
   Taro.setNavigationBarColor({
@@ -58,16 +59,16 @@ const MinePage: React.FC = () => {
           <Text className={styles.balanceLabel}>当前余额</Text>
           <Text className={styles.balanceValue}>
             <Text className={styles.currency}>¥</Text>
-            {mockWalletInfo.balance.toFixed(2)}
+            {balance.toFixed(2)}
           </Text>
         </View>
         <View className={styles.walletStats}>
           <View className={styles.statItem}>
-            <Text className={styles.statValue}>¥{mockWalletInfo.totalRecharge.toFixed(0)}</Text>
+            <Text className={styles.statValue}>¥{totalRecharge.toFixed(0)}</Text>
             <Text className={styles.statLabel}>累计充值</Text>
           </View>
           <View className={styles.statItem}>
-            <Text className={styles.statValue}>¥{mockWalletInfo.totalConsume.toFixed(0)}</Text>
+            <Text className={styles.statValue}>¥{totalConsume.toFixed(0)}</Text>
             <Text className={styles.statLabel}>累计消费</Text>
           </View>
         </View>

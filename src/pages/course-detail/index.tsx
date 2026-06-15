@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { useCurrentStore } from '@/hooks/useCurrentStore'
 import { mockCourses } from '@/data/courses'
 import CrossStoreTip from '@/components/CrossStoreTip'
+import { useBookingStore } from '@/store/useBookingStore'
 import type { Course } from '@/types'
 import styles from './index.module.scss'
 
@@ -12,6 +13,7 @@ const CourseDetailPage: React.FC = () => {
   const router = useRouter()
   const courseId = router.params.id
   const { currentStore, isCrossStore } = useCurrentStore()
+  const { addCourseBooking } = useBookingStore()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   const course = useMemo<Course | undefined>(() => {
@@ -42,15 +44,25 @@ const CourseDetailPage: React.FC = () => {
   }, [course, crossStore, isFull])
 
   const confirmBooking = useCallback(() => {
-    console.log('[CourseDetail] Confirm booking course:', course?.id)
+    if (!course) return
+    console.log('[CourseDetail] Confirm booking course:', course.id)
     setShowConfirmModal(false)
 
     Taro.showLoading({ title: '预约中...' })
 
     setTimeout(() => {
+      const result = addCourseBooking(course, crossStore)
       Taro.hideLoading()
 
-      if (crossStore && course?.needCrossStoreConfirm) {
+      if (!result.success) {
+        Taro.showToast({
+          title: result.message,
+          icon: 'none'
+        })
+        return
+      }
+
+      if (crossStore && course.needCrossStoreConfirm) {
         Taro.showModal({
           title: '预约提交成功',
           content: '跨门店预约已提交，请等待门店审核确认。',
@@ -59,7 +71,7 @@ const CourseDetailPage: React.FC = () => {
         })
       } else {
         Taro.showToast({
-          title: '预约成功',
+          title: result.message,
           icon: 'success'
         })
       }
@@ -68,7 +80,7 @@ const CourseDetailPage: React.FC = () => {
         Taro.navigateBack()
       }, 1500)
     }, 1000)
-  }, [course, crossStore])
+  }, [course, crossStore, addCourseBooking])
 
   const handleCancelConfirm = useCallback(() => {
     setShowConfirmModal(false)

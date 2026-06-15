@@ -2,8 +2,8 @@ import React, { useState, useMemo, useCallback } from 'react'
 import { View, Text, Button } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import { mockBookings } from '@/data/bookings'
 import { useCurrentStore } from '@/hooks/useCurrentStore'
+import { useBookingStore } from '@/store/useBookingStore'
 import type { Booking } from '@/types'
 import styles from './index.module.scss'
 
@@ -27,13 +27,14 @@ const statusMap: Record<string, { label: string; className: string }> = {
 const BookingListPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('all')
   const { currentStore, isCrossStore } = useCurrentStore()
+  const { bookings, cancelBooking } = useBookingStore()
 
   const filteredBookings = useMemo(() => {
-    return mockBookings.filter(booking => {
+    return bookings.filter(booking => {
       if (activeTab === 'all') return true
       return booking.status === activeTab
     })
-  }, [activeTab])
+  }, [activeTab, bookings])
 
   const getTypeIcon = (type: string) => {
     return type === 'course' ? '📚' : '👤'
@@ -54,15 +55,16 @@ const BookingListPage: React.FC = () => {
           Taro.showLoading({ title: '取消中...' })
           setTimeout(() => {
             Taro.hideLoading()
+            const result = cancelBooking(booking.id)
             Taro.showToast({
-              title: '已取消',
-              icon: 'success'
+              title: result.message,
+              icon: result.success ? 'success' : 'none'
             })
           }, 800)
         }
       }
     })
-  }, [])
+  }, [cancelBooking])
 
   const handleGoBook = useCallback(() => {
     Taro.switchTab({ url: '/pages/courses/index' })

@@ -2,13 +2,15 @@ import React, { useState, useCallback } from 'react'
 import { View, Text, Button } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import classNames from 'classnames'
-import { mockWalletInfo, rechargePackages } from '@/data/wallet'
+import { rechargePackages } from '@/data/wallet'
+import { useWalletStore } from '@/store/useWalletStore'
 import type { Transaction } from '@/types'
 import styles from './index.module.scss'
 
 const WalletPage: React.FC = () => {
   const [selectedPackage, setSelectedPackage] = useState<string>('pkg_002')
   const [activeTab, setActiveTab] = useState<'cards' | 'transactions'>('transactions')
+  const { balance, totalRecharge, totalConsume, cards, transactions, recharge } = useWalletStore()
 
   const handleRecharge = useCallback(() => {
     const pkg = rechargePackages.find(p => p.id === selectedPackage)
@@ -19,12 +21,13 @@ const WalletPage: React.FC = () => {
 
     setTimeout(() => {
       Taro.hideLoading()
+      const result = recharge(pkg)
       Taro.showToast({
-        title: '充值成功',
+        title: result.message,
         icon: 'success'
       })
-    }, 1000)
-  }, [selectedPackage])
+    }, 800)
+  }, [selectedPackage, recharge])
 
   const getTxIcon = (type: string) => {
     return type === 'recharge' ? '↑' : '↓'
@@ -36,15 +39,15 @@ const WalletPage: React.FC = () => {
         <Text className={styles.label}>账户余额</Text>
         <View className={styles.balance}>
           <Text className={styles.currency}>¥</Text>
-          <Text className={styles.value}>{mockWalletInfo.balance.toFixed(2)}</Text>
+          <Text className={styles.value}>{balance.toFixed(2)}</Text>
         </View>
         <View className={styles.stats}>
           <View className={styles.statItem}>
-            <Text className={styles.statValue}>¥{mockWalletInfo.totalRecharge.toFixed(0)}</Text>
+            <Text className={styles.statValue}>¥{totalRecharge.toFixed(0)}</Text>
             <Text className={styles.statLabel}>累计充值</Text>
           </View>
           <View className={styles.statItem}>
-            <Text className={styles.statValue}>¥{mockWalletInfo.totalConsume.toFixed(0)}</Text>
+            <Text className={styles.statValue}>¥{totalConsume.toFixed(0)}</Text>
             <Text className={styles.statLabel}>累计消费</Text>
           </View>
         </View>
@@ -80,7 +83,7 @@ const WalletPage: React.FC = () => {
       <View className={styles.section} style={{ marginTop: '32rpx' }}>
         <Text className={styles.sectionTitle}>我的储值卡</Text>
         <View className={styles.cardList}>
-          {mockWalletInfo.cards.map((card) => (
+          {cards.map((card) => (
             <View key={card.id} className={styles.cardItem}>
               <View className={styles.cardInfo}>
                 <Text className={styles.cardName}>{card.name}</Text>
@@ -100,7 +103,7 @@ const WalletPage: React.FC = () => {
       <View className={styles.section}>
         <Text className={styles.sectionTitle}>交易记录</Text>
         <View className={styles.transactionList}>
-          {mockWalletInfo.transactions.map((tx: Transaction) => (
+          {transactions.map((tx: Transaction) => (
             <View key={tx.id} className={styles.txItem}>
               <View className={classNames(styles.txIcon, styles[tx.type])}>
                 {getTxIcon(tx.type)}

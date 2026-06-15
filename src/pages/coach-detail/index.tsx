@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { useCurrentStore } from '@/hooks/useCurrentStore'
 import { mockCoaches } from '@/data/coaches'
 import CrossStoreTip from '@/components/CrossStoreTip'
+import { useBookingStore } from '@/store/useBookingStore'
 import type { Coach } from '@/types'
 import styles from './index.module.scss'
 
@@ -12,6 +13,7 @@ const CoachDetailPage: React.FC = () => {
   const router = useRouter()
   const coachId = router.params.id
   const { currentStore, isCrossStore } = useCurrentStore()
+  const { addCoachBooking } = useBookingStore()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   const coach = useMemo<Coach | undefined>(() => {
@@ -32,13 +34,23 @@ const CoachDetailPage: React.FC = () => {
   }, [coach, crossStore])
 
   const confirmBooking = useCallback(() => {
-    console.log('[CoachDetail] Confirm booking coach:', coach?.id)
+    if (!coach) return
+    console.log('[CoachDetail] Confirm booking coach:', coach.id)
     setShowConfirmModal(false)
 
     Taro.showLoading({ title: '预约中...' })
 
     setTimeout(() => {
+      const result = addCoachBooking(coach, crossStore)
       Taro.hideLoading()
+
+      if (!result.success) {
+        Taro.showToast({
+          title: result.message,
+          icon: 'none'
+        })
+        return
+      }
 
       if (crossStore) {
         Taro.showModal({
@@ -49,7 +61,7 @@ const CoachDetailPage: React.FC = () => {
         })
       } else {
         Taro.showToast({
-          title: '预约成功',
+          title: result.message,
           icon: 'success'
         })
       }
@@ -58,7 +70,7 @@ const CoachDetailPage: React.FC = () => {
         Taro.navigateBack()
       }, 1500)
     }, 1000)
-  }, [coach, crossStore])
+  }, [coach, crossStore, addCoachBooking])
 
   const handleCancelConfirm = useCallback(() => {
     setShowConfirmModal(false)
