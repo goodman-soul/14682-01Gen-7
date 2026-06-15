@@ -1,0 +1,251 @@
+@use '@/styles/variables.scss' as *;
+
+.walletPage {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 40rpx);
+}
+
+.balanceCard {
+  margin: $spacing-lg $page-padding;
+  padding: $spacing-xl;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+
+  .label {
+    font-size: $font-size-sm;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: $spacing-xs;
+  }
+
+  .balance {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: $spacing-lg;
+
+    .currency {
+      font-size: $font-size-xl;
+      color: $color-text-white;
+      margin-right: 8rpx;
+    }
+
+    .value {
+      font-size: 64rpx;
+      font-weight: $font-weight-bold;
+      color: $color-text-white;
+    }
+  }
+
+  .stats {
+    display: flex;
+
+    .statItem {
+      flex: 1;
+
+      .statValue {
+        display: block;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $color-text-white;
+      }
+
+      .statLabel {
+        font-size: $font-size-xs;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+}
+
+.section {
+  margin: 0 $page-padding $spacing-lg;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+
+  .sectionTitle {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.rechargePackages {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+
+  .packageCard {
+    padding: $spacing-md;
+    background: $color-bg-hover;
+    border-radius: $radius-lg;
+    text-align: center;
+    border: 2rpx solid transparent;
+    transition: all $transition-base;
+
+    &.selected {
+      border-color: $color-primary;
+      background: rgba($color-primary, 0.05);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    .amount {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $color-primary;
+      margin-bottom: 4rpx;
+
+      .currency {
+        font-size: $font-size-sm;
+        margin-right: 2rpx;
+      }
+    }
+
+    .bonus {
+      font-size: $font-size-xs;
+      color: $color-warning;
+      margin-bottom: $spacing-xs;
+    }
+
+    .desc {
+      font-size: $font-size-xs;
+      color: $color-text-tertiary;
+    }
+  }
+}
+
+.cardList {
+  .cardItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md 0;
+    border-bottom: 1rpx solid $color-divider;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .cardInfo {
+      flex: 1;
+
+      .cardName {
+        font-size: $font-size-md;
+        font-weight: $font-weight-medium;
+        color: $color-text-primary;
+        margin-bottom: 4rpx;
+      }
+
+      .expireDate {
+        font-size: $font-size-xs;
+        color: $color-text-tertiary;
+      }
+    }
+
+    .cardBalance {
+      text-align: right;
+
+      .balanceValue {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+
+        .currency {
+          font-size: $font-size-sm;
+        }
+      }
+    }
+  }
+}
+
+.transactionList {
+  .txItem {
+    display: flex;
+    align-items: center;
+    padding: $spacing-md 0;
+    border-bottom: 1rpx solid $color-divider;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .txIcon {
+      width: 64rpx;
+      height: 64rpx;
+      border-radius: $radius-round;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-lg;
+      margin-right: $spacing-md;
+      flex-shrink: 0;
+
+      &.recharge {
+        background: rgba($color-success, 0.1);
+        color: $color-success;
+      }
+
+      &.consume {
+        background: rgba($color-error, 0.1);
+        color: $color-error;
+      }
+    }
+
+    .txInfo {
+      flex: 1;
+      min-width: 0;
+
+      .txDesc {
+        font-size: $font-size-md;
+        color: $color-text-primary;
+        margin-bottom: 4rpx;
+        @include text-ellipsis;
+      }
+
+      .txMeta {
+        font-size: $font-size-xs;
+        color: $color-text-tertiary;
+      }
+    }
+
+    .txAmount {
+      flex-shrink: 0;
+      margin-left: $spacing-md;
+
+      .amountValue {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+
+        &.recharge {
+          color: $color-success;
+        }
+
+        &.consume {
+          color: $color-text-primary;
+        }
+      }
+    }
+  }
+}
+
+.rechargeBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  color: $color-text-white;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  margin: 0 $page-padding;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}

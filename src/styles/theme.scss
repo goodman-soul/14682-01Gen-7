@@ -1,0 +1,85 @@
+@use './variables.scss' as *;
+
+$theme-orange: (
+  primary: #FF6B35,
+  primaryLight: #FFA07A,
+  primaryDark: #E55A2B,
+  accent: #00D4AA,
+  bgPage: #F7F8FA,
+  bgCard: #FFFFFF,
+  bgHover: #F2F3F5,
+  textPrimary: #1D2129,
+  textSecondary: #4E5969,
+  textTertiary: #86909C,
+  textDisabled: #C9CDD4,
+  textWhite: #FFFFFF,
+  border: #E5E6EB,
+  divider: #F2F3F5,
+  success: #00B42A,
+  warning: #FF7D00,
+  error: #F53F3F,
+  info: #FF6B35
+);
+
+$theme-blue: (
+  primary: #2563EB,
+  primaryLight: #60A5FA,
+  primaryDark: #1D4ED8,
+  accent: #F59E0B,
+  bgPage: #F1F5F9,
+  bgCard: #FFFFFF,
+  bgHover: #F2F3F5,
+  textPrimary: #1D2129,
+  textSecondary: #4E5969,
+  textTertiary: #86909C,
+  textDisabled: #C9CDD4,
+  textWhite: #FFFFFF,
+  border: #E5E6EB,
+  divider: #F2F3F5,
+  success: #00B42A,
+  warning: #FF7D00,
+  error: #F53F3F,
+  info: #2563EB
+);
+
+$theme-dark: (
+  primary: #111827,
+  primaryLight: #374151,
+  primaryDark: #0F172A,
+  accent: #EF4444,
+  bgPage: #0F172A,
+  bgCard: #1E293B,
+  bgHover: #334155,
+  textPrimary: #F8FAFC,
+  textSecondary: #CBD5E1,
+  textTertiary: #94A3B8,
+  textDisabled: #475569,
+  textWhite: #FFFFFF,
+  border: #334155,
+  divider: #1E293B,
+  success: #10B981,
+  warning: #F59E0B,
+  error: #EF4444,
+  info: #3B82F6
+);
+
+@mixin theme($theme-map) {
+  --color-primary: #{map-get($theme-map, primary)};
+  --color-primary-light: #{map-get($theme-map, primaryLight)};
+  --color-primary-dark: #{map-get($theme-map, primaryDark)};
+  --color-accent: #{map-get($theme-map, accent)};
+  --color-bg-page: #{map-get($theme-map, bgPage)};
+  --color-bg-card: #{map-get($theme-map, bgCard)};
+  --color-bg-hover: #{map-get($theme-map, bgHover)};
+  --color-text-primary: #{map-get($theme-map, textPrimary)};
+  --color-text-secondary: #{map-get($theme-map, textSecondary)};
+  --color-text-tertiary: #{map-get($theme-map, textTertiary)};
+  --color-text-disabled: #{map-get($theme-map, textDisabled)};
+  --color-text-white: #{map-get($theme-map, textWhite)};
+  --color-border: #{map-get($theme-map, border)};
+  --color-divider: #{map-get($theme-map, divider)};
+  --color-success: #{map-get($theme-map, success)};
+  --color-warning: #{map-get($theme-map, warning)};
+  --color-error: #{map-get($theme-map, error)};
+  --color-info: #{map-get($theme-map, info)};
+}

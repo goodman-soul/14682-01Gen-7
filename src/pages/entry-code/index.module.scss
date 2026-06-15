@@ -1,0 +1,194 @@
+@use '@/styles/variables.scss' as *;
+
+.entryCodePage {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding: $spacing-lg $page-padding;
+}
+
+.storeInfo {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+
+  .storeName {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  .storeAddress {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+  }
+}
+
+.qrCard {
+  background: $color-bg-card;
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  box-shadow: $shadow-card;
+  text-align: center;
+  margin-bottom: $spacing-lg;
+
+  .cardHeader {
+    margin-bottom: $spacing-lg;
+
+    .title {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+      margin-bottom: $spacing-xs;
+    }
+
+    .subtitle {
+      font-size: $font-size-sm;
+      color: $color-text-tertiary;
+    }
+  }
+
+  .qrContainer {
+    width: 400rpx;
+    height: 400rpx;
+    margin: 0 auto $spacing-lg;
+    background: linear-gradient(135deg, $color-bg-hover 0%, $color-bg-page 100%);
+    border-radius: $radius-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300rpx;
+      height: 300rpx;
+      background:
+        linear-gradient(45deg, $color-primary 25%, transparent 25%),
+        linear-gradient(-45deg, $color-primary 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, $color-primary 75%),
+        linear-gradient(-45deg, transparent 75%, $color-primary 75%);
+      background-size: 40rpx 40rpx;
+      background-position: 0 0, 0 20rpx, 20rpx -20rpx, -20rpx 0;
+      opacity: 0.6;
+    }
+
+    .centerLogo {
+      width: 80rpx;
+      height: 80rpx;
+      border-radius: $radius-lg;
+      background: $color-bg-card;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36rpx;
+      font-weight: $font-weight-bold;
+      color: $color-primary;
+      box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .codeNumber {
+    font-size: 48rpx;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    letter-spacing: 8rpx;
+    margin-bottom: $spacing-md;
+  }
+
+  .expireInfo {
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+
+    .time {
+      color: $color-primary;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
+
+.tipsCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+
+  .tipsTitle {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-md;
+  }
+
+  .tipsList {
+    .tipItem {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: $spacing-sm;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .tipIcon {
+        width: 36rpx;
+        height: 36rpx;
+        border-radius: $radius-round;
+        background: rgba($color-primary, 0.1);
+        color: $color-primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        margin-right: $spacing-sm;
+        flex-shrink: 0;
+      }
+
+      .tipText {
+        flex: 1;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: $line-height-normal;
+      }
+    }
+  }
+}
+
+.storeSelectBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-md;
+  background: $color-bg-card;
+  color: $color-primary;
+  border: 2rpx solid $color-primary;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  margin-top: $spacing-lg;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.refreshBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  color: $color-text-white;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  margin-top: $spacing-lg;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}

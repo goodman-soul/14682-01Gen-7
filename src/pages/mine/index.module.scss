@@ -1,0 +1,194 @@
+@use '@/styles/variables.scss' as *;
+
+.minePage {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 120rpx);
+}
+
+.header {
+  padding: $spacing-xl $page-padding $spacing-xl * 2;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: 0 0 $radius-xl $radius-xl;
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      width: 120rpx;
+      height: 120rpx;
+      border-radius: $radius-round;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48rpx;
+      margin-right: $spacing-lg;
+      flex-shrink: 0;
+    }
+
+    .userMeta {
+      flex: 1;
+      min-width: 0;
+
+      .userName {
+        display: block;
+        font-size: $font-size-xxl;
+        font-weight: $font-weight-semibold;
+        color: $color-text-white;
+        margin-bottom: $spacing-xs;
+      }
+
+      .memberLevel {
+        display: inline-block;
+        padding: 4rpx 16rpx;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: $radius-round;
+        font-size: $font-size-xs;
+        color: $color-text-white;
+      }
+    }
+  }
+}
+
+.walletCard {
+  margin: -$spacing-lg $page-padding $spacing-lg;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  padding: $spacing-lg;
+
+  .walletHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-md;
+
+    .walletTitle {
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+    }
+
+    .rechargeBtn {
+      @include button-reset;
+      height: $button-height-sm;
+      padding: 0 $spacing-lg;
+      background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+      color: $color-text-white;
+      border-radius: $radius-button;
+      font-size: $font-size-sm;
+
+      &:active {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .balanceInfo {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: $spacing-sm;
+
+    .balanceLabel {
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      margin-right: $spacing-sm;
+    }
+
+    .balanceValue {
+      font-size: 48rpx;
+      font-weight: $font-weight-bold;
+      color: $color-primary;
+
+      .currency {
+        font-size: $font-size-lg;
+        margin-right: 4rpx;
+      }
+    }
+  }
+
+  .walletStats {
+    display: flex;
+    gap: $spacing-xl;
+
+    .statItem {
+      .statValue {
+        display: block;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+      }
+
+      .statLabel {
+        font-size: $font-size-xs;
+        color: $color-text-tertiary;
+      }
+    }
+  }
+}
+
+.menuSection {
+  margin: 0 $page-padding $spacing-lg;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+
+  .menuItem {
+    display: flex;
+    align-items: center;
+    padding: $spacing-lg;
+    border-bottom: 1rpx solid $color-divider;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:active {
+      background: $color-bg-hover;
+    }
+
+    .menuIcon {
+      width: 64rpx;
+      height: 64rpx;
+      border-radius: $radius-md;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-xl;
+      margin-right: $spacing-md;
+      flex-shrink: 0;
+
+      &.icon1 { background: linear-gradient(135deg, #FF6B35, #FFA07A); }
+      &.icon2 { background: linear-gradient(135deg, #00D4AA, #5EEAD4); }
+      &.icon3 { background: linear-gradient(135deg, #8B5CF6, #A78BFA); }
+      &.icon4 { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+      &.icon5 { background: linear-gradient(135deg, #3B82F6, #60A5FA); }
+    }
+
+    .menuText {
+      flex: 1;
+      font-size: $font-size-md;
+      color: $color-text-primary;
+    }
+
+    .menuArrow {
+      font-size: $font-size-lg;
+      color: $color-text-tertiary;
+    }
+  }
+}
+
+.themeSection {
+  margin: 0 $page-padding;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  padding: 0 $page-padding;
+}

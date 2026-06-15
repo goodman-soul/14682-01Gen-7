@@ -1,0 +1,44 @@
+@use '@/styles/variables.scss' as *;
+
+.crossStoreTip {
+  display: flex;
+  align-items: flex-start;
+  padding: $spacing-md;
+  background: rgba($color-warning, 0.08);
+  border-radius: $radius-md;
+  margin-bottom: $spacing-md;
+
+  .warningIcon {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: $radius-round;
+    background: $color-warning;
+    color: $color-text-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    flex-shrink: 0;
+    margin-right: $spacing-sm;
+  }
+
+  .tipContent {
+    flex: 1;
+
+    .tipTitle {
+      display: block;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $color-warning;
+      margin-bottom: 4rpx;
+    }
+
+    .tipDesc {
+      display: block;
+      font-size: $font-size-xs;
+      color: $color-text-secondary;
+      line-height: $line-height-normal;
+    }
+  }
+}

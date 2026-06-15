@@ -1,0 +1,210 @@
+@use '@/styles/variables.scss' as *;
+
+.homePage {
+  min-height: 100vh;
+  background: $color-bg-page;
+}
+
+.header {
+  position: relative;
+  padding: $spacing-lg $page-padding $spacing-xl;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: 0 0 $radius-xl $radius-xl;
+
+  .greeting {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-white;
+    margin-bottom: $spacing-sm;
+  }
+
+  .storeCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: $radius-lg;
+    padding: $spacing-md;
+    backdrop-filter: blur(10rpx);
+
+    .storeInfo {
+      flex: 1;
+      min-width: 0;
+
+      .storeName {
+        display: block;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-semibold;
+        color: $color-text-white;
+        margin-bottom: 4rpx;
+        @include text-ellipsis;
+      }
+
+      .storeMeta {
+        display: flex;
+        align-items: center;
+
+        .metaText {
+          font-size: $font-size-xs;
+          color: rgba(255, 255, 255, 0.8);
+        }
+
+        .dot {
+          width: 6rpx;
+          height: 6rpx;
+          border-radius: $radius-round;
+          background: rgba(255, 255, 255, 0.6);
+          margin: 0 $spacing-xs;
+        }
+      }
+    }
+
+    .switchBtn {
+      flex-shrink: 0;
+      padding: $spacing-sm $spacing-md;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: $radius-button;
+      font-size: $font-size-sm;
+      color: $color-text-white;
+    }
+  }
+}
+
+.quickEntry {
+  margin: -$spacing-md $page-padding $spacing-lg;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  padding: $spacing-lg 0;
+
+  .entryList {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .entryItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+    .entryIcon {
+      width: 88rpx;
+      height: 88rpx;
+      border-radius: $radius-round;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $color-text-white;
+      margin-bottom: $spacing-sm;
+
+      &.icon1 { background: linear-gradient(135deg, #FF6B35, #FFA07A); }
+      &.icon2 { background: linear-gradient(135deg, #00D4AA, #5EEAD4); }
+      &.icon3 { background: linear-gradient(135deg, #8B5CF6, #A78BFA); }
+      &.icon4 { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+    }
+
+    .entryText {
+      font-size: $font-size-sm;
+      color: $color-text-primary;
+    }
+  }
+}
+
+.section {
+  padding: 0 $page-padding;
+  margin-bottom: $spacing-lg;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+
+  .title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  .more {
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+  }
+}
+
+.equipmentScroll {
+  @include scroll-x-container;
+
+  .equipmentItem {
+    @include scroll-x-item(200rpx);
+    margin-right: $spacing-md;
+
+    .equipmentCard {
+      background: $color-bg-card;
+      border-radius: $radius-lg;
+      padding: $spacing-md;
+      box-shadow: $shadow-card;
+
+      .eqName {
+        display: block;
+        font-size: $font-size-md;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+        margin-bottom: $spacing-sm;
+      }
+
+      .eqCount {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        margin-bottom: $spacing-sm;
+
+        .available {
+          color: $color-success;
+          font-weight: $font-weight-semibold;
+        }
+      }
+
+      .eqStatus {
+        display: inline-block;
+        padding: 4rpx 12rpx;
+        border-radius: $radius-xs;
+        font-size: $font-size-xs;
+
+        &.normal {
+          background: rgba($color-success, 0.1);
+          color: $color-success;
+        }
+
+        &.busy {
+          background: rgba($color-warning, 0.1);
+          color: $color-warning;
+        }
+
+        &.full {
+          background: rgba($color-error, 0.1);
+          color: $color-error;
+        }
+      }
+    }
+  }
+}
+
+.courseList {
+  .courseCard {
+    margin-bottom: $spacing-md;
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: $spacing-xl 0;
+
+  .emptyText {
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+  }
+}

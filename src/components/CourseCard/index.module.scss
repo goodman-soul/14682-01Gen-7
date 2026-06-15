@@ -1,0 +1,112 @@
+@use '@/styles/variables.scss' as *;
+
+.courseCard {
+  display: flex;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  margin-bottom: $spacing-md;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $shadow-card-hover;
+  }
+
+  .cover {
+    width: 240rpx;
+    height: 200rpx;
+    flex-shrink: 0;
+  }
+
+  .content {
+    flex: 1;
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-xs;
+
+    .name {
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+      @include text-ellipsis;
+      flex: 1;
+      margin-right: $spacing-sm;
+    }
+
+    .tag {
+      flex-shrink: 0;
+      padding: 4rpx 12rpx;
+      background: rgba($color-primary, 0.1);
+      color: $color-primary;
+      border-radius: $radius-xs;
+      font-size: $font-size-xs;
+
+      &.tagWarning {
+        background: rgba($color-warning, 0.1);
+        color: $color-warning;
+      }
+    }
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-sm;
+
+    .metaItem {
+      font-size: $font-size-xs;
+      color: $color-text-tertiary;
+      @include text-ellipsis;
+      max-width: 120rpx;
+    }
+
+    .metaDivider {
+      margin: 0 $spacing-xs;
+      color: $color-text-tertiary;
+      font-size: $font-size-xs;
+    }
+  }
+
+  .progressBar {
+    height: 8rpx;
+    background: $color-divider;
+    border-radius: $radius-round;
+    overflow: hidden;
+    margin-bottom: $spacing-xs;
+
+    .progressFill {
+      height: 100%;
+      background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 100%);
+      border-radius: $radius-round;
+      transition: width $transition-base;
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .enrolled {
+      font-size: $font-size-xs;
+      color: $color-text-tertiary;
+    }
+
+    .crossTip {
+      font-size: $font-size-xs;
+      color: $color-warning;
+      font-weight: $font-weight-medium;
+    }
+  }
+}
